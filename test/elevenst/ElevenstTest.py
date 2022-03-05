@@ -21,14 +21,27 @@ class ElevenstKeyword:
         return content
 
     def parse_data(self, content):
-        soup = BeautifulSoup(content, 'html.parser')
+        #soup = BeautifulSoup(content, 'html.parser')
+        content = content.replace('fetchSearchRanking(', '')[:-1]
+        
+        json_object = json.loads(content)
+        items = json_object.get('items')
 
+        data = {}
+
+        for item in items:
+            rank = item.get('currentRank')
+            keyword = item.get('keyword')
+
+            data[rank] = keyword
+
+        return data
 
     def run(self):
         content = self.request_data()
-        #data = self.parse_data(content)
+        data = self.parse_data(content)
 
-        print(content)
+        print(data)
 
 def main():
     c = ElevenstKeyword.make()
