@@ -1,0 +1,10 @@
+{
+    "db_info": {
+        "user": "id", 
+        "password": "pw", 
+        "host": "host", 
+        "db": "db", 
+        "port": 3306, 
+        "charset": "utf8"
+    }
+}
