@@ -4,6 +4,9 @@ import json
 import db.DBHandler as baseDbHandler
 import util.Logger as BaseLogger
 
+from util.DataWithCollectsite import DataWithCollectsite
+
+from taskJob.keywordmaster.Keywordmaster import Keywordmaster
 from taskJob.elevenst.ElevenstKeyword import ElevenstKeyword
 
 logger = BaseLogger.log
@@ -32,8 +35,11 @@ def main():
     db_info = get_db_info()
     db_handler = make_db_handler(db_info)
 
-    c = ElevenstKeyword.make(db_handler)
-    c.run()
+    keywordmaster = Keywordmaster.make(db_handler)
+
+    elevenstKeyword = ElevenstKeyword.make(db_handler)
+    elevenstDataWithCollectSite = elevenstKeyword.run()
+    keywordmaster.run(elevenstDataWithCollectSite)
 
 if __name__ == '__main__':
     main()

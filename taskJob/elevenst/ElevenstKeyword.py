@@ -1,6 +1,7 @@
 from util.Result import Result
 from util.Header import Header
 from util.Get import Get
+from util.DataWithCollectsite import DataWithCollectsite
 
 from taskJob.elevenst.ElevenstCV import ElevenstCV
 
@@ -37,7 +38,6 @@ class ElevenstKeyword:
         return content
 
     def parse_data(self, content):
-        #soup = BeautifulSoup(content, 'html.parser')
         content = content.replace('fetchSearchRanking(', '')[:-1]
         
         json_object = json.loads(content)
@@ -71,3 +71,9 @@ class ElevenstKeyword:
         content = self.request_data()
         data = self.parse_data(content)
         self.insert_mws_keyword(data)
+
+        dataWithCollectsite = DataWithCollectsite()
+        dataWithCollectsite.set_data(data)
+        dataWithCollectsite.set_collect_site(self.collect_site)
+
+        return dataWithCollectsite

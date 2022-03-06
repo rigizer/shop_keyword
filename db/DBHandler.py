@@ -39,6 +39,23 @@ class DBHandler():
         finally:
             if conn != None:
                 conn.close()
+    
+    def insert_mws_keyword_rate(self, param):
+        conn = None
+
+        try:
+            conn = self.get_connect()
+
+            self.execute_query(conn, self.query.get('INSERT_MWS_KEYWORD_RATE'), param)
+            conn.commit()
+
+        except Exception as e:
+            logger.error('[INSERT_MWS_KEYWORD_RATE] Exception: {}'.format(e))
+            pass
+
+        finally:
+            if conn != None:
+                conn.close()
 
     def execute_query(self, conn, query, param):
         cur = None

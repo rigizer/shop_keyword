@@ -4,6 +4,12 @@ import time
 
 curr_dir = os.path.dirname(os.path.abspath(__file__)) + '/../logs'
 
+def replace_comma(s):
+    return s.replace(',', '')
+
+def sleep(t):
+    time.sleep(t)
+
 def make_directory(directory):
     try:
         if not (os.path.isdir(directory)):
