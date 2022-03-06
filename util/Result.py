@@ -7,6 +7,7 @@ import requests     # pip3 install requests
 class Result:
     def __init__(self, get, post, header):
         self.request_body = None
+        self.datatype = None
 
         if get != None:
             self.type = 'GET'
@@ -20,6 +21,9 @@ class Result:
             
             if post.get_request_body() != None:
                 self.request_body = post.get_request_body()
+
+            if post.get_datatype() != None:
+                self.datatype = post.get_datatype()
         
         self.header = header.get_header()
 
@@ -36,7 +40,10 @@ class Result:
             response = requests.get(url, headers=header)
             response.encoding = encoding
         if self.type == 'POST':
-            response = requests.post(url, headers=header, data=request_body)
+            if self.datatype == None:
+                response = requests.post(url, headers=header, data=request_body)
+            if self.datatype == 'JSON':
+                response = requests.post(url, headers=header, json=request_body)
             response.encoding = encoding
 
         self.content = response.text

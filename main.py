@@ -8,6 +8,7 @@ from util.DataWithCollectsite import DataWithCollectsite
 
 from taskJob.keywordmaster.Keywordmaster import Keywordmaster
 from taskJob.elevenst.ElevenstKeyword import ElevenstKeyword
+from taskJob.naverstore.NaverstoreKeyword import NaverstoreKeyword
 
 logger = BaseLogger.log
 
@@ -37,9 +38,13 @@ def main():
 
     keywordmaster = Keywordmaster.make(db_handler)
 
-    elevenstKeyword = ElevenstKeyword.make(db_handler)
-    elevenstDataWithCollectSite = elevenstKeyword.run()
-    keywordmaster.run(elevenstDataWithCollectSite)
+    #elevenstKeyword = ElevenstKeyword.make(db_handler)
+    #elevenstDataWithCollectSite = elevenstKeyword.run()
+    #keywordmaster.run(elevenstDataWithCollectSite)
+
+    naverstoreKeyword = NaverstoreKeyword.make(db_handler)
+    naverstoreDataWithCollectSite = naverstoreKeyword.run()
+    keywordmaster.run(naverstoreDataWithCollectSite)
 
 if __name__ == '__main__':
     main()
