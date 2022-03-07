@@ -11,6 +11,7 @@ from taskJob.elevenst.ElevenstKeyword import ElevenstKeyword
 from taskJob.naverstore.NaverstoreKeyword import NaverstoreKeyword
 from taskJob.auction.AuctionKeyword import AuctionKeyword
 from taskJob.gmarket.GmarketKeyword import GmarketKeyword
+from taskJob.coupang.CoupangKeyword import CoupangKeyword
 
 logger = BaseLogger.log
 
@@ -52,9 +53,13 @@ def main():
     #auctionDataWithCollectSite = auctionKeyword.run()
     #keywordmaster.run(auctionDataWithCollectSite)
 
-    gmarketKeyword = GmarketKeyword.make(db_handler)
-    gmarketDataWithCollectSite = gmarketKeyword.run()
-    keywordmaster.run(gmarketDataWithCollectSite)
+    #gmarketKeyword = GmarketKeyword.make(db_handler)
+    #gmarketDataWithCollectSite = gmarketKeyword.run()
+    #keywordmaster.run(gmarketDataWithCollectSite)
+
+    coupangKeyword = CoupangKeyword.make(db_handler)
+    coupangDataWithCollectSite = coupangKeyword.run()
+    keywordmaster.run(coupangDataWithCollectSite)
 
 if __name__ == '__main__':
     main()
