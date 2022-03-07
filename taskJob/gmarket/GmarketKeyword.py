@@ -41,7 +41,6 @@ class GmarketKeyword:
         json_object = json.loads(content)
         items = json_object.get('data').get('popularSearchKeywords').get('popularKeywordList')
 
-
         data = {}
 
         for item in items:
