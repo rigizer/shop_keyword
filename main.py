@@ -9,6 +9,7 @@ from util.DataWithCollectsite import DataWithCollectsite
 from taskJob.keywordmaster.Keywordmaster import Keywordmaster
 from taskJob.elevenst.ElevenstKeyword import ElevenstKeyword
 from taskJob.naverstore.NaverstoreKeyword import NaverstoreKeyword
+from taskJob.auction.AuctionKeyword import AuctionKeyword
 
 logger = BaseLogger.log
 
@@ -42,9 +43,13 @@ def main():
     #elevenstDataWithCollectSite = elevenstKeyword.run()
     #keywordmaster.run(elevenstDataWithCollectSite)
 
-    naverstoreKeyword = NaverstoreKeyword.make(db_handler)
-    naverstoreDataWithCollectSite = naverstoreKeyword.run()
-    keywordmaster.run(naverstoreDataWithCollectSite)
+    #naverstoreKeyword = NaverstoreKeyword.make(db_handler)
+    #naverstoreDataWithCollectSite = naverstoreKeyword.run()
+    #keywordmaster.run(naverstoreDataWithCollectSite)
+
+    auctionKeyword = AuctionKeyword.make(db_handler)
+    auctionDataWithCollectSite = auctionKeyword.run()
+    keywordmaster.run(auctionDataWithCollectSite)
 
 if __name__ == '__main__':
     main()
