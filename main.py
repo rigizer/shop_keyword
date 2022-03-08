@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 
 import db.DBHandler as baseDbHandler
 import util.Logger as BaseLogger
@@ -35,31 +36,41 @@ def get_db_info():
 def make_db_handler(db_info):
     return baseDbHandler.DBHandler(db_info)
 
+def insert_mws_service_log(db_handler, start_time, end_time):
+    param = (start_time, end_time)
+    db_handler.insert_mws_service_log(param)
+
 def main():
+    start_time = datetime.datetime.now()
+
     db_info = get_db_info()
     db_handler = make_db_handler(db_info)
 
     keywordmaster = Keywordmaster.make(db_handler)
 
-    #elevenstKeyword = ElevenstKeyword.make(db_handler)
-    #elevenstDataWithCollectSite = elevenstKeyword.run()
-    #keywordmaster.run(elevenstDataWithCollectSite)
+    elevenstKeyword = ElevenstKeyword.make(db_handler)
+    elevenstDataWithCollectSite = elevenstKeyword.run()
+    keywordmaster.run(elevenstDataWithCollectSite)
 
-    #naverstoreKeyword = NaverstoreKeyword.make(db_handler)
-    #naverstoreDataWithCollectSite = naverstoreKeyword.run()
-    #keywordmaster.run(naverstoreDataWithCollectSite)
+    naverstoreKeyword = NaverstoreKeyword.make(db_handler)
+    naverstoreDataWithCollectSite = naverstoreKeyword.run()
+    keywordmaster.run(naverstoreDataWithCollectSite)
 
-    #auctionKeyword = AuctionKeyword.make(db_handler)
-    #auctionDataWithCollectSite = auctionKeyword.run()
-    #keywordmaster.run(auctionDataWithCollectSite)
+    auctionKeyword = AuctionKeyword.make(db_handler)
+    auctionDataWithCollectSite = auctionKeyword.run()
+    keywordmaster.run(auctionDataWithCollectSite)
 
-    #gmarketKeyword = GmarketKeyword.make(db_handler)
-    #gmarketDataWithCollectSite = gmarketKeyword.run()
-    #keywordmaster.run(gmarketDataWithCollectSite)
+    gmarketKeyword = GmarketKeyword.make(db_handler)
+    gmarketDataWithCollectSite = gmarketKeyword.run()
+    keywordmaster.run(gmarketDataWithCollectSite)
 
     coupangKeyword = CoupangKeyword.make(db_handler)
     coupangDataWithCollectSite = coupangKeyword.run()
     keywordmaster.run(coupangDataWithCollectSite)
+
+    end_time = datetime.datetime.now()
+
+    insert_mws_service_log(db_handler, start_time, end_time)
 
 if __name__ == '__main__':
     main()

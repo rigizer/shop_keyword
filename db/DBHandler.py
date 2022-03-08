@@ -57,6 +57,23 @@ class DBHandler():
             if conn != None:
                 conn.close()
 
+    def insert_mws_service_log(self, param):
+        conn = None
+
+        try:
+            conn = self.get_connect()
+
+            self.execute_query(conn, self.query.get('INSERT_MWS_SERVICE_LOG'), param)
+            conn.commit()
+
+        except Exception as e:
+            logger.error('[INSERT_MWS_SERVICE_LOG] Exception: {}'.format(e))
+            pass
+
+        finally:
+            if conn != None:
+                conn.close()
+
     def execute_query(self, conn, query, param):
         cur = None
 
